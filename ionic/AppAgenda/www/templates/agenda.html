@@ -1,0 +1,74 @@
+<ion-view title="Agenda" id="page15" style="background-color:#F5FBFF;" class=" ">
+    <ion-content padding="true" class="has-header" ng-controller="agendaCtrl">
+        
+        
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+
+            <input type="text" placeholder="Pesquisar contato" ng-model="pesquisar">
+        </label>
+
+        <div class="spacer" style="width: 283px; height: 10px;"></div>
+        
+        <form id="agenda-form3" class="list ">
+            <ion-toggle toggle-class="toggle-positive" ng-model="favorito" ng-click="filtrarContatosFavoritos()">Somente favoritos</ion-toggle>
+        </form>
+        
+        <div class="spacer" style="width: 283px; height: 0px;"></div>
+        
+        <button class="button button-block button-assertive" ng-click="habilitarExclusao()">Excluír</button>
+
+        <ion-list show-delete="permitirExcluir">
+            <ion-item class="item-icon-left item-icon-right positive" ng-repeat="contato in contatos | filter: pesquisar">
+                <ion-delete-button class="ion-minus-circled" ng-click="excluirContato(contato)"></ion-delete-button>
+
+                <i class="icon ion-ios-personadd"></i>{{contato.nome}}<br>
+                <i ng-class="contato.favorito==true?'icon ion-android-favorite' : 'icon ion-heart-broken'"></i>{{contato.telefone}}
+            </ion-item>
+        </ion-list>
+        <button class="button button-block button-positive" ng-click="abrirTelaContato()">
+            Novo
+        </button>
+        
+        <script id="contato.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Novo Contato</h1>
+                </ion-header-bar>
+                <ion-content>
+                    <form class="list" name="meuFormulario">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Nome:</span>
+                            <input type="text" placeholder="Nome" ng-model="contato.nome">
+                        </label>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Telefone:</span>
+                            <input type="text" placeholder="Telfone" ng-model="contato.telefone">
+                        </label>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Favorito</span>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="contato.favorito">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </label>
+
+                        <div class="row">
+                            <div class="col col-50">
+                                <a ng-click="cancelarContato()" class="button button-assertive button-block">Cancelar</a>
+                            </div>
+                            <div class="col col-50">
+                                <a ng-click="salvarContato(contato)" ng-disabled="meuFormulario.$invalid" class="button button-positive button-block">Salvar</a>
+                            </div>
+                        </div>
+                    </form>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+
+    </ion-content>
+</ion-view>
