@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
   
-.controller('agendaCtrl', function($scope, $ionicModal, agendaApi) {
+.controller('agendaCtrl', function($scope, $ionicModal, agendaApi, $ionicLoading) {
 	
 	var contatos = [];
 	$scope.permitirExcluir = false;
@@ -38,6 +38,14 @@ angular.module('app.controllers', [])
 		}
 	}
 	
+	$scope.exibirAguarde = function(){
+		$ionicLoading.show({template: '<p class="item-icon-center"><ion-spinner icon="lines" class="spinner-calm"></ion-spinner></p>Aguarde, processando...'});
+		setTimeout(fecharAguarde, 6000);
+	}
+
+	function fecharAguarde(){
+		$ionicLoading.hide()
+	}
 	
 	obterObterContatos();
 
@@ -76,7 +84,10 @@ angular.module('app.controllers', [])
 
 })
    
-.controller('sobreCtrl', function($scope) {
+.controller('sobreCtrl', function($scope, $ionicNavBarDelegate) {
+
+	//Remover o botao voltar
+	$ionicNavBarDelegate.showBackButton(false);
 
 })
  
