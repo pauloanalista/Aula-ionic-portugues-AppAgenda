@@ -1,0 +1,32 @@
+<ion-view view-title="App do Correio">
+  <ion-content class="padding">
+    <div class="list">
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Informe seu cep</span>
+            <input type="text" placeholder="26112-230" ng-model="cepDigitado">
+        </label>
+
+        <button class="button button-block button-positive" ng-click="consultarEndereco(cepDigitado)">Consultar Endereço</button>
+    </div>
+
+     <ion-list ng-hide="endereco==null">
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Logradouro</span>
+          <input type="text" readonly value="{{endereco.logradouro}}">
+      </label>
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Complemento</span>
+          <input type="text" readonly placeholder="26112-230" value="{{endereco.complemento}}">
+      </label>
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Bairro</span>
+          <input type="text" readonly placeholder="26112-230" value="{{endereco.bairro}}">
+      </label>
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Localidade</span>
+          <input type="text" readonly placeholder="26112-230" value="{{endereco.localidade}}">
+      </label>
+    </ion-list>
+    
+  </ion-content>
+</ion-view>
